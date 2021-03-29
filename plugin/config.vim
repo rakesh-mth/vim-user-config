@@ -508,3 +508,9 @@ endif
     if filereadable(COC_VIM_PATH) | exec "source " . COC_VIM_PATH | endif
     if filereadable(COC_EXTENSIONS_PATH) | exec "source " . COC_EXTENSIONS_PATH | endif
 
+" source all plugin configs
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/tags-config.vim'
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/indent-config.vim'
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
