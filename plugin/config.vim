@@ -108,6 +108,7 @@ endif
         exec('set guioptions-=imTr')
       endif
     endfunction
+    nnoremap <F11> <Esc>:call ToggleGUICruft()<cr>
 
 " spell checker
     map <leader>sp :setlocal spell! spelllang=en_us<cr>
@@ -151,15 +152,15 @@ endif
     endfunc
     if has('nvim')
         if exists('g:fvim_loaded')
-            nnoremap <A-CR> :FVimToggleFullScreen<CR>
+            nnoremap <leader>TF :FVimToggleFullScreen<CR>
         elseif has('gui_vimr')
-            nnoremap <A-CR> :VimRToggleFullscreen<CR>
+            nnoremap <leader>TF :VimRToggleFullscreen<CR>
         else
-            nnoremap <A-CR> :call ToggleFullScreen()<CR>
+            nnoremap <leader>TF :call ToggleFullScreen()<CR>
         endif
         inoremap <silent>  <S-Insert>  <C-R>+| "paste from system clipboard in insert mode
     elseif has('gui_macvim')
-        nnoremap <A-CR> :call ToggleFullScreen()<CR>
+        nnoremap <leader>TF :call ToggleFullScreen()<CR>
     endif
 
 " quickfix mappings

@@ -24,7 +24,6 @@ else
         " colorscheme solarized
         set guioptions=imTr
         set guioptions-=imTr  "no_icon, menu_bar, toolbar, scrollbar
-        nnoremap <F11> <Esc>:call ToggleGUICruft()<cr>
     else
         " colorscheme nord 
     endif
