@@ -71,7 +71,7 @@ endfunction
     Plug 'rust-lang/rust.vim' " rust language support
     Plug 'fatih/vim-go' " , { 'do': ':GoUpdateBinaries' } " golang support
     Plug 'HerringtonDarkholme/yats.vim' " Add a syntax file for typescript. YATS is the best
-    Plug 'mhartington/nvim-typescript', {'do': './install.sh'} " typescript support
+    " Plug 'mhartington/nvim-typescript', {'do': './install.sh'} " typescript support, commented out because of error on quiting vim / neovim
     Plug 'sheerun/vim-polyglot' " used by nova color schema, multiple programming language support (basic)
     Plug 'mattn/webapi-vim' " webapi neede by rust pluggin
     Plug 'rhysd/vim-healthcheck', Cond(!has('nvim'))
