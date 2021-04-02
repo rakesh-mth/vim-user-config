@@ -75,6 +75,4 @@ endfunction
     Plug 'sheerun/vim-polyglot' " used by nova color schema, multiple programming language support (basic)
     Plug 'mattn/webapi-vim' " webapi neede by rust pluggin
     Plug 'rhysd/vim-healthcheck', Cond(!has('nvim'))
-    " user vim configurations
-    Plug 'rakesh-mth/vim-user-config' 
 
