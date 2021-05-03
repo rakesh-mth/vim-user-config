@@ -341,10 +341,10 @@ endif
 " copy and paste from system clipboard using \y and \p
     nnoremap <leader><C-y> "*y
     nnoremap <leader><C-p> "*p
-    nnoremap <leader>y "+y
-    nnoremap <leader>p "+p
-    nnoremap <leader>Y "+Y
-    nnoremap <leader>P "+P
+    " nnoremap <leader>y "+y
+    " nnoremap <leader>p "+p
+    " nnoremap <leader>Y "+Y
+    " nnoremap <leader>P "+P
     nnoremap <leader>yy "+yy
 
 " update args with git listed files
