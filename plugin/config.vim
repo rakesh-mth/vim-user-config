@@ -162,6 +162,10 @@ endif
     elseif has('gui_macvim')
         nnoremap <leader>TF :call ToggleFullScreen()<CR>
     endif
+    " save as root user
+    if has('mac') || has('unix')
+        cmap w!! w !sudo tee > /dev/null %
+    endif
 
 " quickfix mappings
     nnoremap <leader>qo :copen<cr>
