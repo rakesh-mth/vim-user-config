@@ -184,7 +184,7 @@ endif
     nnoremap <leader>fed :e $MYVIMRC<cr>| " open vim configuration file (.vimrc or init.vim)
     nnoremap <leader>gb  :GBranches<cr>| " open  page (from fugitive)
     nnoremap <leader>gt  :GTags<cr>| " open  page (from fugitive)
-    nnoremap <leader>gs  :Gstatus<cr>| " open git status page (from fugitive)
+    nnoremap <leader>gs  :Git<cr>| " open git status page (from fugitive)
     nnoremap <leader>gc  :Commits<cr>| " open commit list in current branch
     nnoremap <leader>gd :tabe \| Git diff \| wincmd o<cr>| " open git diff in new tab
     nnoremap <leader>gdd :tabe \| Git diff --staged \| wincmd o<cr>| " open git diff in new tab
