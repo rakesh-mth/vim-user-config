@@ -71,6 +71,11 @@
         if !empty(glob(ruby_host_prog)) | let g:ruby_host_prog = ruby_host_prog | endif
     endif
 
+" add fzf into path on windows. use from pluggin instead of system installed using choco.
+    if has('win32')
+         let $PATH = $USERPROFILE."\\.fzf\\bin;".$PATH
+    endif
+
 " install plug.vim (bootstrap plugin)
     let plugRuntimePath = HOME_DIR . '/.config/' . VIM_FOLDER " internal uses only
     let plugPath = HOME_DIR . '/.config/' . VIM_FOLDER . '/autoload/plug.vim'
@@ -84,12 +89,12 @@
     if !has('nvim') && has('win32') | set viminfo+=n~/_viminfo | endif
 
 " lsp config for nvim version > 0.5
-if has('nvim-0.5')
-lua <<EOF
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
-EOF
-endif
+" if has('nvim-0.5')
+" lua <<EOF
+" require'lspconfig'.gopls.setup{}
+" require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+" EOF
+" endif
 
 " configure option (string, number, list) and env variables
     if has('win32')
