@@ -27,6 +27,7 @@ endfunction
     Plug 'powerline/powerline-fonts'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fzf vim
     Plug 'junegunn/fzf.vim' " fzf vim extra (GFile, Buffers etc commands)
+    Plug 'benwainwright/fzf-project' " switch between project
     Plug 'stsewd/fzf-checkout.vim' " Manage branches and tags with fzf. 
     Plug 'neomake/neomake', Cond(has('nvim'))
     Plug 'vim-syntastic/syntastic' " syntax checking
@@ -74,5 +75,5 @@ endfunction
     " Plug 'mhartington/nvim-typescript', {'do': './install.sh'} " typescript support, commented out because of error on quiting vim / neovim
     Plug 'sheerun/vim-polyglot' " used by nova color schema, multiple programming language support (basic)
     Plug 'mattn/webapi-vim' " webapi neede by rust pluggin
-    Plug 'rhysd/vim-healthcheck', Cond(!has('nvim'))
+    Plug 'rhysd/vim-healthcheck', Cond(!has('nvim')) " CheckHealth in vim
 

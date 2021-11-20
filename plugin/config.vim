@@ -289,6 +289,10 @@
     " change select-all from A-a to C-a. now can use C-a C-c to bring back all results to quickfix window
     let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
+" for plugin fzf-project
+    noremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
+    if has('win32') | let g:fzfSwitchProjectWorkspaces=['f:\DevTrees'] | else | let g:fzfSwitchProjectWorkspaces=[$HOME . '/workspaces', $HOME . '/workspaces/rakesh-mth'] | endif
+
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
     command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
     function! QuickfixFilenames()
