@@ -490,7 +490,7 @@
     endfunction
     augroup plugin_nerd_tree
         autocmd FileType nerdtree setlocal relativenumber
-        autocmd BufEnter *.cpp,*.h,*.py,*.sh,*.yml,*.bat,*.md,*.json,*.txt if &modifiable && s:IsNerdTreeOpen() && strlen(expand('%')) > 0 && !&diff | NERDTreeFind | wincmd p | endif
+        autocmd BufEnter *.cpp,*.h,*.py,*.el,*.sh,*.yml,*.bat,*.md,*.json,*.txt,.zshrc,.bashrc if &modifiable && s:IsNerdTreeOpen() && strlen(expand('%')) > 0 && !&diff | NERDTreeFind | wincmd p | endif
     augroup END 
 
     augroup plugin_goyo
