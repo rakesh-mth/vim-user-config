@@ -290,8 +290,10 @@
     let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 " for plugin fzf-project
+    let g:fzfSwitchProjectProjectDepth = 2 " one level deep for finding projects
     noremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
-    if has('win32') | let g:fzfSwitchProjectWorkspaces=['f:\DevTrees'] | else | let g:fzfSwitchProjectWorkspaces=[$HOME . '/workspaces', $HOME . '/workspaces/rakesh-mth'] | endif
+    let g:fzfSwitchProjectWorkspaces=[WORKSPACE_FOLDER] " workspaces
+    let g:fzfSwitchProjectProjects=[HOME_DIR . '/.config/nvim/plugged/vim-user-config', HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d'] " individual projects
 
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
     command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
