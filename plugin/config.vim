@@ -189,7 +189,8 @@
     nnoremap <leader>fed :e $MYVIMRC<cr>| " open vim configuration file (.vimrc or init.vim)
     nnoremap <leader>gb  :GBranches<cr>| " open  page (from fugitive)
     nnoremap <leader>gt  :GTags<cr>| " open  page (from fugitive)
-    nnoremap <leader>gs  :Git \| wincmd _ \| normal gu<cr>| " open git status page (from fugitive), and jump to Unstaged
+    nnoremap <leader>gg  :Git \| wincmd _ \| normal gu<cr>| " open git status page (from fugitive), and jump to Unstaged
+    nnoremap <leader>gp  :Git push<cr> " push to remote branch
     nnoremap <leader>gc  :Commits<cr>| " open commit list in current branch
     nnoremap <leader>gd :tabe \| Git diff \| wincmd o<cr>| " open git diff in new tab
     nnoremap <leader>gdd :tabe \| Git diff --staged \| wincmd o<cr>| " open git diff in new tab
