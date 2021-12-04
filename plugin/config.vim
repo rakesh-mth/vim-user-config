@@ -88,13 +88,6 @@
 " set viminfo for startify to work with vim
     if !has('nvim') && has('win32') | set viminfo+=n~/_viminfo | endif
 
-" lsp config for nvim version > 0.5
-" if has('nvim-0.5')
-" lua <<EOF
-" require'lspconfig'.gopls.setup{}
-" require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
-" EOF
-" endif
 
 " configure option (string, number, list) and env variables
     if has('win32')
@@ -531,3 +524,4 @@
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/lsp-config.vim'

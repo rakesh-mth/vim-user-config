@@ -60,7 +60,8 @@ endfunction
     endif
     if has('nvim-0.5')
         Plug 'neovim/nvim-lspconfig'
-        Plug 'nvim-lua/completion-nvim'
+        Plug 'williamboman/nvim-lsp-installer'
+        " Plug 'nvim-lua/completion-nvim' " use coq_nvim later
     endif
     Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
     " Code to execute when the plugin is lazily loaded on demand
