@@ -524,4 +524,8 @@
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/lsp-config.vim'
+
+" source lua files
+if has('nvim-0.5') && exists("g:lspconfig")
+    exec 'luafile ' . PLUGGED_DIR . '/vim-user-config/config/lsp_config.lua'
+endif
