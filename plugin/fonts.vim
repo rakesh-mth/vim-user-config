@@ -16,7 +16,7 @@ endif
 " use nord colorscheme
 
 set background=dark " light or dark
-colorscheme gruvbox
+silent! colorscheme gruvbox " ignore error if gruvbox is not installed
 if has('nvim')
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     " colorscheme solarized_nvimqt
