@@ -511,12 +511,14 @@
     noremap <leader>bta :!msbuild CitrixReceiver\WFCAll.sln  /t:src\pal\gfxrender;src\pal\gfxvisualization;src\drivers\vd\vdtw\vdtw30n;src\drivers\vd\vdlfp /p:Configuration=Release /p:Platform=win32<CR>
 
 
-" source plug configs
+" source plug configs. coc.nvim is used with neovim < 0.5.
+if !has('win32unix') && !has('nvim-0.5')
     let CONFIG_DIR = expand('%:p:h')
     let COC_VIM_PATH =  CONFIG_DIR . "/../config/coc/coc.vim"
     let COC_EXTENSIONS_PATH = CONFIG_DIR . "/../config/coc/coc-extensions.vim"
     if filereadable(COC_VIM_PATH) | exec "source " . COC_VIM_PATH | endif
     if filereadable(COC_EXTENSIONS_PATH) | exec "source " . COC_EXTENSIONS_PATH | endif
+endif
 
 " source all plugin configs
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/tags-config.vim'
