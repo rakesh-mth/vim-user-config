@@ -42,6 +42,8 @@
     let HOME_DIR = substitute(HOME_DIR, "\\", "\/", "g")
 " vim and nvim folder
     if has('nvim') | let VIM_FOLDER = "nvim" | else | let VIM_FOLDER = "vim" | endif
+" vim folder full path
+    let g:UC_VIM_CONFIG_FOLDER_FULL_PATH = HOME_DIR . '/.config/' . VIM_FOLDER
 " workspace folder
     if has('win32') | let WORKSPACE_FOLDER='f:\DevTrees' | else | let WORKSPACE_FOLDER=$HOME . '/workspaces' | endif
 
@@ -77,13 +79,12 @@
     endif
 
 " install plug.vim (bootstrap plugin)
-    let plugRuntimePath = HOME_DIR . '/.config/' . VIM_FOLDER " internal uses only
-    let plugPath = HOME_DIR . '/.config/' . VIM_FOLDER . '/autoload/plug.vim'
+    let plugPath = g:UC_VIM_CONFIG_FOLDER_FULL_PATH . '/autoload/plug.vim'
     if empty(glob(plugPath))
         silent execute '!curl -fLo ' . plugPath . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
-    let &rtp = &rtp . ',' . plugRuntimePath
+    let &rtp = &rtp . ',' . g:UC_VIM_CONFIG_FOLDER_FULL_PATH
 
 " set viminfo for startify to work with vim
     if !has('nvim') && has('win32') | set viminfo+=n~/_viminfo | endif
@@ -526,6 +527,7 @@ endif
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/log.vim'
 
 " source lua files
 if has('nvim-0.5') && exists("g:lspconfig")

@@ -29,18 +29,18 @@ endfunction
     Plug 'junegunn/fzf.vim' " fzf vim extra (GFile, Buffers etc commands)
     Plug 'benwainwright/fzf-project' " switch between project
     Plug 'stsewd/fzf-checkout.vim' " Manage branches and tags with fzf. 
+    Plug 'tpope/vim-fugitive' " git plugin that wraps git commands
+    Plug 'tommcdo/vim-fubitive' " Extend fugitive.vim to support Bitbucket URLs in :Gbrowse
     Plug 'neomake/neomake', Cond(has('nvim'))
     Plug 'vim-syntastic/syntastic' " syntax checking
     Plug 'mhinz/vim-startify' " startup page
     Plug 'octol/vim-cpp-enhanced-highlight'
     Plug 'Yggdroot/indentLine' " add indent line
     Plug 'drmikehenry/vim-fontsize' " change font size using <leader><leader>+
-    Plug 'szw/vim-tags' " auto generate tags using ctags, command TagsGenerate
+    " Plug 'szw/vim-tags' " auto generate tags using ctags, command TagsGenerate. disable because this plugin will change `:cd` during GFile or other fzf commands.
     Plug 'soramugi/auto-ctags.vim' " auto generate tags using ctags, commands Ctags
     Plug 'airblade/vim-gitgutter' " git plugin to show changed lines 
     Plug 'arp242/auto_mkdir2.vim' " auto create directory during file save if directory does not exist
-    Plug 'tpope/vim-fugitive' " git plugin that wraps git commands
-    Plug 'tommcdo/vim-fubitive' " Extend fugitive.vim to support Bitbucket URLs in :Gbrowse
     Plug 'tpope/vim-dispatch' " background jobs. commands: :Make
     Plug 'jiangmiao/auto-pairs' " inserts quotes and parenthesis in pairs as you type
     Plug 'tpope/vim-unimpaired' " commonly used ex commands, ]q [q ]Q [Q etc...
