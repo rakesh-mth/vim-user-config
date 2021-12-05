@@ -61,7 +61,8 @@ endfunction
     if has('nvim-0.5')
         Plug 'neovim/nvim-lspconfig'
         Plug 'williamboman/nvim-lsp-installer'
-        " Plug 'nvim-lua/completion-nvim' " use coq_nvim later
+        Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " run :COQdeps (only once) and then :COQnow
+        Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
     endif
     Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
     " Code to execute when the plugin is lazily loaded on demand
