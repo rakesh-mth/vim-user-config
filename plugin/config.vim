@@ -495,6 +495,14 @@
         autocmd! User GoyoLeave Limelight!
     augroup END
 
+    augroup plugin_fugitive
+        " map <tab> to = to match it with magit in emacs.
+        autocmd FileType fugitive nmap <buffer> <tab> =
+        " map q to gq for quit to match with magit in emacs. Note: q for
+        " recording macro will not work if it is mapped to gq
+        autocmd FileType fugitive nmap <buffer> q gq
+    augroup END
+
     function! VimEnterFunction()
         call AltMapping()
     endfun
