@@ -32,6 +32,7 @@ endfunction
     Plug 'tpope/vim-fugitive' " git plugin that wraps git commands
     Plug 'tommcdo/vim-fubitive' " Extend fugitive.vim to support Bitbucket URLs in :Gbrowse
     Plug 'neomake/neomake', Cond(has('nvim'))
+    Plug 'nanotee/zoxide.vim', Cond(has('nvim'))
     Plug 'vim-syntastic/syntastic' " syntax checking
     Plug 'mhinz/vim-startify' " startup page
     Plug 'octol/vim-cpp-enhanced-highlight'

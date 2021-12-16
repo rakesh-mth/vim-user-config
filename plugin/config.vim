@@ -246,9 +246,6 @@
     nnoremap <silent> <leader>pt :NERDTreeToggle<Enter> :normal zz<CR> :wincmd p<CR>
     nnoremap <silent> <leader>ptf :NERDTreeFind<CR> :normal zz<CR> :wincmd p<CR>
 
-" startify configurations
-    let g:startify_bookmarks = [WORKSPACE_FOLDER]
-
 " for plugin fzf
     noremap <leader>pf :GFiles<CR>
     noremap <leader>pF :Files<CR>
@@ -533,6 +530,7 @@ endif
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
+    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/startify.vim'
     exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/log.vim'
 
 " source lua files
