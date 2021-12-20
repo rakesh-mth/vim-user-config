@@ -250,10 +250,12 @@
     noremap <leader>pf :GFiles<CR>
     noremap <leader>pF :Files<CR>
     noremap <leader>bb :Buffers<CR>
-    noremap <leader>w :Windows<CR>
-    noremap <leader>l :BLines<CR>
-    noremap <leader>L :Lines<CR>
-    noremap <leader>c :Colors<CR>
+    noremap <leader>f  :GFiles<CR>  | " same as <leader>pf
+    noremap <leader>b  :Buffers<CR> | " same as <leader>bb
+    noremap <leader>w  :Windows<CR>
+    noremap <leader>l  :BLines<CR>
+    noremap <leader>L  :Lines<CR>
+    noremap <leader>c  :Colors<CR>
     " Insert mode completion, fails on windows when it looks for /usr/share/dict/words.
     if has('macunix') || ('unix')
         imap <c-x><c-k> <plug>(fzf-complete-word)
