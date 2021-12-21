@@ -27,8 +27,7 @@ endfunction
     Plug 'powerline/powerline-fonts'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fzf vim
     Plug 'junegunn/fzf.vim' " fzf vim extra (GFile, Buffers etc commands)
-    Plug 'rakesh-mth/fzf-project' " switch between project. forked for lcd instead of cd.
-    " Plug 'benwainwright/fzf-project' " switch between project
+    Plug 'benwainwright/fzf-project' " switch between project
     Plug 'stsewd/fzf-checkout.vim' " Manage branches and tags with fzf. 
     Plug 'tpope/vim-fugitive' " git plugin that wraps git commands
     Plug 'tommcdo/vim-fubitive' " Extend fugitive.vim to support Bitbucket URLs in :Gbrowse
