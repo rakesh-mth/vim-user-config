@@ -44,7 +44,7 @@
     endif
 " vim and nvim folder - g:UC_VIM_FOLDER should be defined in init.vim, redfine if it is not already
     if !exists('g:UC_VIM_FOLDER')
-        if has('nvim') | let g:UC_VIM_FOLDER = "nvim/rakesh-mth" | else | let g:UC_VIM_FOLDER = "vim/rakesh-mth" | endif
+        if has('nvim') | let g:UC_VIM_FOLDER = "nvim-config/rakesh-mth" | else | let g:UC_VIM_FOLDER = "vim-config/rakesh-mth" | endif
     endif
 " vim folder full path - g:UC_VIM_CONFIG_FOLDER_FULL_PATH should be defined in init.vim, redfine if it is not already
     if !exists('g:UC_VIM_CONFIG_FOLDER_FULL_PATH')
