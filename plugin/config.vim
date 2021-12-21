@@ -37,26 +37,36 @@
     syntax on
     let mapleader = "\<Space>" " map leader key to Space
 
-" user home dir
-    if has('win32') | let HOME_DIR = $USERPROFILE | else | let HOME_DIR = $HOME | endif
-    let HOME_DIR = substitute(HOME_DIR, "\\", "\/", "g")
-" vim and nvim folder
-    if has('nvim') | let VIM_FOLDER = "nvim" | else | let VIM_FOLDER = "vim" | endif
-" vim folder full path
-    let g:UC_VIM_CONFIG_FOLDER_FULL_PATH = HOME_DIR . '/.config/' . VIM_FOLDER
+" user home dir - g:UC_HOME_DIR should be defined in init.vim, redfine if it is not already.
+    if !exists('g:UC_HOME_DIR')
+        if has('win32') | let g:UC_HOME_DIR = $USERPROFILE | else | let g:UC_HOME_DIR = $HOME | endif
+        let g:UC_HOME_DIR = substitute(g:UC_HOME_DIR, "\\", "\/", "g")
+    endif
+" vim and nvim folder - g:UC_VIM_FOLDER should be defined in init.vim, redfine if it is not already
+    if !exists('g:UC_VIM_FOLDER')
+        if has('nvim') | let g:UC_VIM_FOLDER = "nvim/rakesh-mth" | else | let g:UC_VIM_FOLDER = "vim/rakesh-mth" | endif
+    endif
+" vim folder full path - g:UC_VIM_CONFIG_FOLDER_FULL_PATH should be defined in init.vim, redfine if it is not already
+    if !exists('g:UC_VIM_CONFIG_FOLDER_FULL_PATH')
+        let g:UC_VIM_CONFIG_FOLDER_FULL_PATH = g:UC_HOME_DIR . '/.config/' . g:UC_VIM_FOLDER
+    endif
+" plugged folder - g:UC_PLUGGED_DIR should be defined in init.vim, redfine if it is not already
+    if !exists('g:UC_PLUGGED_DIR')
+        let g:UC_PLUGGED_DIR = g:UC_VIM_CONFIG_FOLDER_FULL_PATH . '/plugged' " Specify a directory for plugins 
+    endif
 " workspace folder
     if has('win32') | let WORKSPACE_FOLDER='f:\DevTrees' | else | let WORKSPACE_FOLDER=$HOME . '/workspaces' | endif
 
 " add python exe locations (virtualenvs)
     if has('win32') || has('win32unix')
-        let python2_vp  = HOME_DIR . '/virtualenvs/python27/Scripts/'
-        let python38_vp = HOME_DIR . '/virtualenvs/python38/Scripts/'
-        let python39_vp = HOME_DIR . '/virtualenvs/python39/Scripts/'
+        let python2_vp  = g:UC_HOME_DIR . '/virtualenvs/python27/Scripts/'
+        let python38_vp = g:UC_HOME_DIR . '/virtualenvs/python38/Scripts/'
+        let python39_vp = g:UC_HOME_DIR . '/virtualenvs/python39/Scripts/'
         let python_exe  = 'python.exe' 
     elseif has('mac') || has('unix')
-        let python2_vp  = HOME_DIR . '/.virtualenvs/python2.7/bin/'
-        let python38_vp = HOME_DIR . '/.virtualenvs/python3.8/bin/'
-        let python39_vp = HOME_DIR . '/.virtualenvs/python3.9/bin/'
+        let python2_vp  = g:UC_HOME_DIR . '/.virtualenvs/python2.7/bin/'
+        let python38_vp = g:UC_HOME_DIR . '/.virtualenvs/python3.8/bin/'
+        let python39_vp = g:UC_HOME_DIR . '/.virtualenvs/python3.9/bin/'
         let python_exe  = 'python'
     endif
     if !empty(glob(python2_vp . python_exe))  | let g:python_host_prog  = python2_vp  . python_exe | endif
@@ -287,7 +297,7 @@
     let g:fzfSwitchProjectProjectDepth = 2 " one level deep for finding projects
     noremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
     let g:fzfSwitchProjectWorkspaces=[WORKSPACE_FOLDER] " workspaces
-    let g:fzfSwitchProjectProjects=[HOME_DIR . '/.config/nvim/plugged/vim-user-config', HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d'] " individual projects
+    let g:fzfSwitchProjectProjects=[g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d'] " individual projects
 
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
     command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
@@ -527,15 +537,15 @@ if !has('win32unix') && !has('nvim-0.5')
 endif
 
 " source all plugin configs
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/tags-config.vim'
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/indent-config.vim'
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/startify.vim'
-    exec 'source ' . PLUGGED_DIR . '/vim-user-config/config/log.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/tags-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/indent-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/startify.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/log.vim'
 
 " source lua files
 if has('nvim-0.5') && exists("g:lspconfig")
-    exec 'luafile ' . PLUGGED_DIR . '/vim-user-config/config/lsp_config.lua'
+    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/lsp_config.lua'
 endif
