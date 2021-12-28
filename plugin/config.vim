@@ -297,7 +297,7 @@
     let g:fzfSwitchProjectProjectDepth = 2 " one level deep for finding projects
     noremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
     let g:fzfSwitchProjectWorkspaces=[WORKSPACE_FOLDER] " workspaces
-    let g:fzfSwitchProjectProjects=[g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d'] " individual projects
+    let g:fzfSwitchProjectProjects=[ stdpath("config"), g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d' ] " individual projects
 
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
     command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
