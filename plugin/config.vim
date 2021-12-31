@@ -54,8 +54,10 @@
     if !exists('g:UC_PLUGGED_DIR')
         let g:UC_PLUGGED_DIR = g:UC_VIM_CONFIG_FOLDER_FULL_PATH . '/plugged' " Specify a directory for plugins 
     endif
-" workspace folder
-    if has('win32') | let WORKSPACE_FOLDER='f:\DevTrees' | else | let WORKSPACE_FOLDER=$HOME . '/workspaces' | endif
+" workspace folder - g:WORKSPACE_DIR should be defined in init.vim, redefine if it is not already
+    if !exists('g:UC_WORKSPACE_FOLDER')
+        let g:UC_WORKSPACE_FOLDER= has('win32') ? 'f:\DevTrees' : $HOME . '/workspaces'
+    endif
 
 " add python exe locations (virtualenvs)
     if has('win32') || has('win32unix')
@@ -104,7 +106,7 @@
     if has('win32')
         let $PATH='C:\Program Files\Git\bin;'.$PATH " add git-bash in the path for fzf + bat to work correctly
     endif
-    let &cdpath=WORKSPACE_FOLDER . ',,' " cdpath to easily change directory using lcd (lcd foldername-in-cdpath)
+    let &cdpath=g:UC_WORKSPACE_FOLDER . ',,' " cdpath to easily change directory using lcd (lcd foldername-in-cdpath)
 
 " lsp for omni func complition
     " autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
@@ -296,7 +298,7 @@
 " for plugin fzf-project
     let g:fzfSwitchProjectProjectDepth = 2 " one level deep for finding projects
     noremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
-    let g:fzfSwitchProjectWorkspaces=[WORKSPACE_FOLDER] " workspaces
+    let g:fzfSwitchProjectWorkspaces=[g:UC_WORKSPACE_FOLDER] " workspaces
     let g:fzfSwitchProjectProjects=[ stdpath("config"), g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d' ] " individual projects
 
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
