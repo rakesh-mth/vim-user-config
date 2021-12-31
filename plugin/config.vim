@@ -242,6 +242,9 @@
         endif
     endfunction
     nnoremap <silent> <leader>tn :exe "tabn" nr2char(getchar())<cr>
+    " move tab using S+H and S+L (mapping similar to LunarVim)
+    nnoremap <silent> <S-H> :exe "tabp"<cr>
+    nnoremap <silent> <S-L> :exe "tabn"<cr>
 
 " windows : maximize window (virtually split only)
     nmap <leader>mm <C-w>1000>
@@ -365,6 +368,7 @@
     nnoremap <leader>Y "+Y
     nnoremap <leader>P "+P
     nnoremap <leader>yy "+yy
+    vnoremap <leader>y "+y
 
 " update args with git listed files
     noremap <leader>a :args `git ls-files`<cr> 2<C-o>
