@@ -22,7 +22,11 @@
     set hlsearch            " search highlighting, not default in vim, default in neovim.
     set incsearch           " search while typing. `set is` or `set nois`. default in vim and neovim.
     set mouse=a             " enable mouse support (resize splits, etc...)
-    " set cursorcolumn        " enable cursor column drawing
+    set colorcolumn=120     " Indent line at what column? Set something like '99999' to not display it
+    set scrolloff=5         " Determines the number of context lines you would like to see above and below the cursor
+    set clipboard=unnamedplus   " use system clipboard ('+') for copy, paste and delete. all goes to '+' register.
+    set cedit=\<C-Y>            " use C-y to go to command mode window (q:) from command mode
+    " set cursorcolumn          " enable cursor column drawing
     if has('win32unix')
         set termguicolors   " enable true color
     else
@@ -289,6 +293,7 @@
     command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
     command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--no-hscroll --delimiter : --nth 4..'}), <bang>0)
     command! -bang -nargs=* GFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--no-hscroll --delimiter : --nth 4..'}), <bang>0)
+    noremap <leader>t   :GFind<CR>
     noremap <leader>st  :GFind<CR>
     noremap <leader>sT  :Find<CR>
     " Open files in vertical horizontal split
@@ -314,6 +319,7 @@
 " for plugin fzf-project
     let g:fzfSwitchProjectProjectDepth = 2 " one level deep for finding projects
     noremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
+    noremap <leader>p  :FzfSwitchProject<CR>| " efficient version (similar to f, b, t, w, l)
     let g:fzfSwitchProjectWorkspaces=[g:UC_WORKSPACE_FOLDER] " workspaces
     let g:fzfSwitchProjectProjects=[ stdpath("config"), g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d' ] " individual projects
 
@@ -375,13 +381,17 @@
     nnoremap <silent> <leader>ad :set paste<CR>m`o<Esc>``:set nopaste<CR>
     nnoremap <silent> <leader>au :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
-" copy and paste from system clipboard using \y and \p
-    nnoremap <leader>y "+y
-    nnoremap <leader>p "+p
-    nnoremap <leader>Y "+Y
-    nnoremap <leader>P "+P
-    nnoremap <leader>yy "+yy
-    vnoremap <leader>y "+y
+" copy and paste from system clipboard using \y and \p. 
+" commented: system clipboard is default for copy, paste and delete.
+    " nnoremap <leader>y "+y
+    " nnoremap <leader>p "+p
+    " nnoremap <leader>Y "+Y
+    " nnoremap <leader>P "+P
+    " nnoremap <leader>yy "+yy
+    " vnoremap <leader>y "+y
+    
+" visual mode mapping for pasting but not yanking (change default behaviour)
+    vnoremap p "_dP 
 
 " update args with git listed files
     noremap <leader>a :args `git ls-files`<cr> 2<C-o>
