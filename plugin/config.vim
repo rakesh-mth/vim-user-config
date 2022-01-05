@@ -390,9 +390,13 @@
     " nnoremap <leader>yy "+yy
     " vnoremap <leader>y "+y
     
-" visual mode mapping for pasting but not yanking (change default behaviour)
+" visual mode mapping 
+    " for pasting but not yanking (change default behaviour)
     vnoremap p "_dP 
-
+    " move text up and down
+    vnoremap <M-j> :m .+1<CR>==
+    vnoremap <M-k> :m .-2<CR>==
+    
 " update args with git listed files
     noremap <leader>a :args `git ls-files`<cr> 2<C-o>
 
@@ -532,11 +536,14 @@
     augroup END
 
     augroup plugin_fugitive
+        autocmd!    
         " map <tab> to = to match it with magit in emacs.
         autocmd FileType fugitive nmap <buffer> <tab> =
         " map q to gq for quit to match with magit in emacs. Note: q for
         " recording macro will not work if it is mapped to gq
         autocmd FileType fugitive nmap <buffer> q gq
+        " put into insert mode after jump to line number 1 for git commit buffer
+        autocmd FileType fugitive 1 | startinsert
     augroup END
 
     function! VimEnterFunction()
