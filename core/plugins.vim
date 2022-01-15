@@ -63,6 +63,7 @@ endfunction
     if has('nvim-0.5')
         Plug 'neovim/nvim-lspconfig'
         Plug 'williamboman/nvim-lsp-installer'
+        Plug 'tamago324/nlsp-settings.nvim' " to configure Neovim LSP using json files
         Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " run :COQdeps (only once) and then :COQnow
         Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
     endif
