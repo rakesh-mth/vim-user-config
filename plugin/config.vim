@@ -543,7 +543,7 @@
         " recording macro will not work if it is mapped to gq
         autocmd FileType fugitive nmap <buffer> q gq
         " put into insert mode after jump to line number 1 for git commit buffer
-        autocmd FileType fugitive 1 | startinsert
+        autocmd FileType gitcommit,gitrebase 1 | startinsert
     augroup END
 
     function! VimEnterFunction()
