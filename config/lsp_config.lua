@@ -74,7 +74,15 @@ lsp_installer.on_server_ready(function(server)
 	server:setup(opts)
 end)
 
--- config for null-ls
+-- config for nlsp-settings.nvim
+local nlspsettings = require("nlspsettings")
+nlspsettings.setup({
+	config_home = vim.fn.stdpath("config") .. "/nlsp-settings",
+	local_settings_root_markers = { ".git" },
+	jsonls_append_default_schemas = true,
+})
+
+-- config for null-ls.nvim
 require("null-ls").setup({
 	sources = {
 		-- lua formatter and linter
