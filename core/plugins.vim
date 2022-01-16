@@ -61,6 +61,7 @@ endfunction
         endif
     endif
     if has('nvim-0.5')
+        Plug 'nvim-treesitter/nvim-treesitter' " treesitter for better text color
         Plug 'nvim-lua/plenary.nvim'  " dependencies for luss-ls
         Plug 'neovim/nvim-lspconfig'  " nvim lsp configure
         Plug 'williamboman/nvim-lsp-installer' " nvim lsp install and configure using nvim-lspconfig
