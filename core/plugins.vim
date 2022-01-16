@@ -61,9 +61,11 @@ endfunction
         endif
     endif
     if has('nvim-0.5')
-        Plug 'neovim/nvim-lspconfig'
-        Plug 'williamboman/nvim-lsp-installer'
+        Plug 'nvim-lua/plenary.nvim'  " dependencies for luss-ls
+        Plug 'neovim/nvim-lspconfig'  " nvim lsp configure
+        Plug 'williamboman/nvim-lsp-installer' " nvim lsp install and configure using nvim-lspconfig
         Plug 'tamago324/nlsp-settings.nvim' " to configure Neovim LSP using json files
+        Plug 'jose-elias-alvarez/null-ls.nvim', {'commit': '288c4582f62f04944412acaed098fc16a1818464'} " null-ls language server for formatter and linter (in addition to lsp)
         Plug 'ms-jpq/coq_nvim', {'branch': 'coq'} " run :COQdeps (only once) and then :COQnow
         Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
     endif

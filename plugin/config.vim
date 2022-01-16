@@ -328,6 +328,7 @@
 " lsp mappings
     noremap <leader>lI :LspInstallInfo<CR>
     noremap <leader>li :LspInfo<CR>
+    noremap <leader>ln :NullLsInfo<CR>
 
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
     command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
@@ -556,6 +557,8 @@
         autocmd!
         " map q to exit lspinfo window
         autocmd FileType lspinfo nmap <buffer> q <C-w>c
+        " map q to exit null-ls-info window
+        autocmd FileType null-ls-info nmap <buffer> q <C-w>c
     augroup END
 
     function! VimEnterFunction()

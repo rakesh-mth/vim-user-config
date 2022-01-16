@@ -32,8 +32,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 	buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 	buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-	buf_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	buf_set_keymap("n", "<space>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+	buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
 -- enable lsp servers. commented because of below for loop.
@@ -73,3 +73,12 @@ lsp_installer.on_server_ready(function(server)
 	-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 	server:setup(opts)
 end)
+
+-- config for null-ls
+require("null-ls").setup({
+	sources = {
+		require("null-ls").builtins.formatting.stylua,
+		require("null-ls").builtins.diagnostics.luacheck,
+		require("null-ls").builtins.completion.spell,
+	},
+})
