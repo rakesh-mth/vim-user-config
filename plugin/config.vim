@@ -129,7 +129,9 @@
     map <leader>sp :setlocal spell! spelllang=en_us<cr>
 
 " disable highlights
-    nnoremap <leader>nh :noh<cr>    
+    nnoremap <leader>nh :noh<cr>
+    " mapping similar to LunarVim
+    nnoremap <leader>h :noh<cr>
 
 " productivity
     nnoremap <leader>] ]]zz
@@ -322,6 +324,10 @@
     noremap <leader>p  :FzfSwitchProject<CR>| " efficient version (similar to f, b, t, w, l)
     let g:fzfSwitchProjectWorkspaces=[g:UC_WORKSPACE_FOLDER] " workspaces
     let g:fzfSwitchProjectProjects=[ stdpath("config"), g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d' ] " individual projects
+
+" lsp mappings
+    noremap <leader>lI :LspInstallInfo<CR>
+    noremap <leader>li :LspInfo<CR>
 
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
     command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
@@ -544,6 +550,12 @@
         autocmd FileType fugitive nmap <buffer> q gq
         " put into insert mode after jump to line number 1 for git commit buffer
         autocmd FileType gitcommit,gitrebase 1 | startinsert
+    augroup END
+
+    augroup plugin_lsp
+        autocmd!
+        " map q to exit lspinfo window
+        autocmd FileType lspinfo nmap <buffer> q <C-w>c
     augroup END
 
     function! VimEnterFunction()
