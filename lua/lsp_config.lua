@@ -1,4 +1,25 @@
-local nvim_lsp = require("lspconfig")
+local status_ok, lspconfig = pcall(require, "lspconfig")
+if not status_ok then
+	return
+end
+
+local lsp_installer
+status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+if not status_ok then
+	return
+end
+
+local nlspsettings
+status_ok, nlspsettings = pcall(require, "nlspsettings")
+if not status_ok then
+	return
+end
+
+local null_ls
+status_ok, null_ls = pcall(require, "null-ls")
+if not status_ok then
+	return
+end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -39,18 +60,19 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
+-- using lspconfig
 -- enable lsp servers. commented because of below for loop.
--- nvim_lsp.golangci_lint_ls.setup{}
--- nvim_lsp.gopls.setup{}
--- nvim_lsp.pylsp.setup{cmd={'pyls'}}
--- nvim_lsp.clangd.setup{}
+-- lspconfig.golangci_lint_ls.setup{}
+-- lspconfig.gopls.setup{}
+-- lspconfig.pylsp.setup{cmd={'pyls'}}
+-- lspconfig.clangd.setup{}
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- [rakesh] commented because nvim-lsp-installer will be used below
 -- local servers = { "golangci_lint_ls", "gopls", "pylsp", "clangd", "rust_analyzer", "tsserver" }
 -- for _, lsp in ipairs(servers) do
--- 	nvim_lsp[lsp].setup({
+-- 	lspconfig[lsp].setup({
 -- 		on_attach = on_attach,
 -- 		flags = {
 -- 			debounce_text_changes = 150,
@@ -59,7 +81,6 @@ end
 -- end
 
 -- using nvim-lsp-installer
-local lsp_installer = require("nvim-lsp-installer")
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
 lsp_installer.on_server_ready(function(server)
@@ -78,7 +99,6 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 -- config for nlsp-settings.nvim
-local nlspsettings = require("nlspsettings")
 nlspsettings.setup({
 	config_home = vim.fn.stdpath("config") .. "/nlsp-settings",
 	local_settings_root_markers = { ".git" },
@@ -86,7 +106,7 @@ nlspsettings.setup({
 })
 
 -- config for null-ls.nvim
-require("null-ls").setup({
+null_ls.setup({
 	sources = {
 		-- lua formatter and linter
 		require("null-ls").builtins.formatting.stylua,
