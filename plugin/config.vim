@@ -81,19 +81,6 @@
     if !empty(glob(python38_vp . 'nvr')) | let $PATH = python38_vp . ':' . $PATH | endif
     if !empty(glob(python39_vp . 'nvr')) | let $PATH = python39_vp . ':' . $PATH | endif
 
-" add ruby and gem (user) path to PATH. install neovim gem using `gem install --user-install neovim`
-    if has('mac') " use homebrew ruby
-        let $PATH = '/usr/local/opt/ruby/bin/:'.$PATH 
-        let gem_path = trim(system('gem environment gempath | cut -d ":" -f 1'))
-        let ruby_host_prog = gem_path . '/bin/neovim-ruby-host'
-        if !empty(glob(ruby_host_prog)) | let g:ruby_host_prog = ruby_host_prog | endif
-    endif
-
-" add fzf into path on windows. use from pluggin instead of system installed using choco.
-    if has('win32')
-         let $PATH = $USERPROFILE."\\.fzf\\bin;".$PATH
-    endif
-
 " install plug.vim (bootstrap plugin)
     let plugPath = g:UC_VIM_CONFIG_FOLDER_FULL_PATH . '/autoload/plug.vim'
     if empty(glob(plugPath))
@@ -106,13 +93,10 @@
     if !has('nvim') && has('win32') | set viminfo+=n~/_viminfo | endif
 
 
-" configure option (string, number, list) and env variables
-    if has('win32')
-        let $PATH='C:\Program Files\Git\bin;'.$PATH " add git-bash in the path for fzf + bat to work correctly
-    endif
+" configure options (string, number, list)
     let &cdpath=g:UC_WORKSPACE_FOLDER . ',,' " cdpath to easily change directory using lcd (lcd foldername-in-cdpath)
 
-" lsp for omni func complition
+" lsp for omni func complition - this is moved to lua file for lsp
     " autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " toggle gui elements in VIM (no impact in nvim-qt)
@@ -267,6 +251,9 @@
     nnoremap <silent> <leader>pt :NERDTreeToggle<Enter> :normal zz<CR> :wincmd p<CR>
     nnoremap <silent> <leader>ptf :NERDTreeFind<CR> :normal zz<CR> :wincmd p<CR>
 
+" for plugin startify
+    nnoremap <silent> <leader>; :Startify<CR> | " to match with LunarVim dashboard
+
 " for plugin fzf
     noremap <leader>pf :GFiles<CR>
     noremap <leader>pF :Files<CR>
@@ -320,15 +307,15 @@
 
 " for plugin fzf-project
     let g:fzfSwitchProjectProjectDepth = 2 " one level deep for finding projects
-    noremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
-    noremap <leader>p  :FzfSwitchProject<CR>| " efficient version (similar to f, b, t, w, l)
+    nnoremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
+    nnoremap <leader>p  :FzfSwitchProject<CR>| " efficient version (similar to f, b, t, w, l)
     let g:fzfSwitchProjectWorkspaces=[g:UC_WORKSPACE_FOLDER] " workspaces
     let g:fzfSwitchProjectProjects=[ stdpath("config"), g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d' ] " individual projects
 
 " lsp mappings
-    noremap <leader>lI :LspInstallInfo<CR>
-    noremap <leader>li :LspInfo<CR>
-    noremap <leader>ln :NullLsInfo<CR>
+    nnoremap <leader>lI :LspInstallInfo<CR>
+    nnoremap <leader>li :LspInfo<CR>
+    nnoremap <leader>ln :NullLsInfo<CR>
 
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
     command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
@@ -594,6 +581,7 @@ endif
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/startify.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/path.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/log.vim'
 
 " source lua files
