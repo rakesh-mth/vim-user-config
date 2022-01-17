@@ -255,15 +255,15 @@
     nnoremap <silent> <leader>; :Startify<CR> | " to match with LunarVim dashboard
 
 " for plugin fzf
-    noremap <leader>pf :GFiles<CR>
-    noremap <leader>pF :Files<CR>
-    noremap <leader>bb :Buffers<CR>
-    noremap <leader>f  :GFiles<CR>  | " same as <leader>pf
-    noremap <leader>b  :Buffers<CR> | " same as <leader>bb
-    noremap <leader>w  :Windows<CR>
-    noremap <leader>l  :BLines<CR>
-    noremap <leader>L  :Lines<CR>
-    noremap <leader>c  :Colors<CR>
+    nnoremap <leader>pf :GFiles<CR>
+    nnoremap <leader>pF :Files<CR>
+    nnoremap <leader>bb :Buffers<CR>
+    nnoremap <leader>f  :GFiles<CR>  | " same as <leader>pf
+    nnoremap <leader>b  :Buffers<CR> | " same as <leader>bb
+    nnoremap <leader>w  :Windows<CR>
+    nnoremap <leader>l  :BLines<CR>
+    nnoremap <leader>L  :Lines<CR>
+    nnoremap <leader>c  :Colors<CR>
     " Insert mode completion, fails on windows when it looks for /usr/share/dict/words.
     if has('macunix') || ('unix')
         imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -282,9 +282,9 @@
     command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
     command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--no-hscroll --delimiter : --nth 4..'}), <bang>0)
     command! -bang -nargs=* GFind call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--no-hscroll --delimiter : --nth 4..'}), <bang>0)
-    noremap <leader>t   :GFind<CR>
-    noremap <leader>st  :GFind<CR>
-    noremap <leader>sT  :Find<CR>
+    nnoremap <leader>t   :GFind<CR>
+    nnoremap <leader>st  :GFind<CR>
+    nnoremap <leader>sT  :Find<CR>
     " Open files in vertical horizontal split
     nnoremap <silent> <Leader>pfS :call fzf#run(fzf#wrap( { 'sink': 'botright split', 'down': '40%' } ))<CR>
     nnoremap <silent> <Leader>pfs :call fzf#run(fzf#wrap( { 'source': 'git ls-files', 'sink': 'botright split', 'down': '40%' } ))<CR>
@@ -369,7 +369,7 @@
         execute 'buffer ' . currBuff 
     endfunction
     command! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
-    noremap <leader>br :Bufdo e<cr><esc>
+    nnoremap <leader>br :Bufdo e<cr><esc>
 
 " add line above and below without leaving normal mode
     nnoremap <silent> <leader>ad :set paste<CR>m`o<Esc>``:set nopaste<CR>
@@ -392,7 +392,7 @@
     vnoremap <M-k> :m .-2<CR>==
     
 " update args with git listed files
-    noremap <leader>a :args `git ls-files`<cr> 2<C-o>
+    nnoremap <leader>a :args `git ls-files`<cr> 2<C-o>
 
 " search TODO, FIXME or any text and put them in cwindow
     function! AgCommand(word, options)
@@ -557,12 +557,12 @@
     augroup END
 
 " build rfwin projects
-    noremap <leader>mrg :Dispatch ctxmake gfxrender<CR>
-    noremap <leader>brg :!msbuild CitrixReceiver\WFCAll.sln  /t:src\pal\gfxrender /p:Configuration=Release /p:Platform=win32<CR>
-    noremap <leader>brgd :Dispatch! msbuild CitrixReceiver\WFCAll.sln  /t:src\pal\gfxrender /p:Configuration=Release /p:Platform=win32<CR>
-    noremap <leader>brt :!msbuild CitrixReceiver\WFCAll.sln  /t:src\drivers\vd\vdtw\vdtw30n /p:Configuration=Release /p:Platform=win32<CR>
-    noremap <leader>brtd :Dispatch! msbuild CitrixReceiver\WFCAll.sln  /t:src\drivers\vd\vdtw\vdtw30n /p:Configuration=Release /p:Platform=win32<CR> 
-    noremap <leader>bta :!msbuild CitrixReceiver\WFCAll.sln  /t:src\pal\gfxrender;src\pal\gfxvisualization;src\drivers\vd\vdtw\vdtw30n;src\drivers\vd\vdlfp /p:Configuration=Release /p:Platform=win32<CR>
+    nnoremap <leader>mrg :Dispatch ctxmake gfxrender<CR>
+    nnoremap <leader>brg :!msbuild CitrixReceiver\WFCAll.sln  /t:src\pal\gfxrender /p:Configuration=Release /p:Platform=win32<CR>
+    nnoremap <leader>brgd :Dispatch! msbuild CitrixReceiver\WFCAll.sln  /t:src\pal\gfxrender /p:Configuration=Release /p:Platform=win32<CR>
+    nnoremap <leader>brt :!msbuild CitrixReceiver\WFCAll.sln  /t:src\drivers\vd\vdtw\vdtw30n /p:Configuration=Release /p:Platform=win32<CR>
+    nnoremap <leader>brtd :Dispatch! msbuild CitrixReceiver\WFCAll.sln  /t:src\drivers\vd\vdtw\vdtw30n /p:Configuration=Release /p:Platform=win32<CR> 
+    nnoremap <leader>bta :!msbuild CitrixReceiver\WFCAll.sln  /t:src\pal\gfxrender;src\pal\gfxvisualization;src\drivers\vd\vdtw\vdtw30n;src\drivers\vd\vdlfp /p:Configuration=Release /p:Platform=win32<CR>
 
 
 " source plug configs. coc.nvim is used with neovim < 0.5.
