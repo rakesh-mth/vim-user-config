@@ -24,7 +24,7 @@ endfunction
     Plug 'JulioJu/neovim-qt-colors-solarized-truecolor-only', Cond(has('nvim')) " solarized color scheme for neovim
     Plug 'altercation/vim-colors-solarized' " solarized color scheme. if not in gui then make sure terminal use solarized scheme.
     Plug 'vim-airline/vim-airline'
-    " Plug 'powerline/powerline-fonts' " this plugin seems to contain only fonts
+    Plug 'powerline/powerline-fonts' " install fonts manually (using install.ps1 or install.sh) for airline status
     " productivity plugins
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " fzf vim
     Plug 'junegunn/fzf.vim' " fzf vim extra (GFile, Buffers etc commands)
