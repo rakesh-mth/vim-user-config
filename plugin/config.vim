@@ -248,6 +248,7 @@
     nnoremap <leader>ta :tag 
 
 " for plugin nerd tree : enable line numbers, make sure relative line numbers are used
+    nnoremap <silent> <leader>e :NERDTreeToggle<CR> | " mapping similar to LunarVim
     nnoremap <silent> <leader>pt :NERDTreeToggle<Enter> :normal zz<CR> :wincmd p<CR>
     nnoremap <silent> <leader>ptf :NERDTreeFind<CR> :normal zz<CR> :wincmd p<CR>
 

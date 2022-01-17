@@ -38,8 +38,6 @@ endfunction
     Plug 'mhinz/vim-startify' " startup page
     Plug 'Yggdroot/indentLine' " add indent line
     Plug 'drmikehenry/vim-fontsize' " change font size using <leader><leader>+
-    " Plug 'szw/vim-tags' " auto generate tags using ctags, command TagsGenerate. disable because this plugin will change `:cd` during GFile or other fzf commands.
-    " Plug 'ludovicchabant/vim-gutentags' " auto generate tags - no external dependncies other than ctags. will use this instead of auto-ctags
     Plug 'soramugi/auto-ctags.vim' " auto generate tags using ctags, commands Ctags
     Plug 'airblade/vim-gitgutter' " git plugin to show changed lines 
     Plug 'arp242/auto_mkdir2.vim' " auto create directory during file save if directory does not exist
@@ -83,7 +81,12 @@ endfunction
     Plug 'PProvost/vim-ps1' " powershell syntax coloring
     Plug 'rust-lang/rust.vim' " rust language support
     Plug 'fatih/vim-go' " , { 'do': ':GoUpdateBinaries' } " golang support
-    " Plug 'mhartington/nvim-typescript', {'do': './install.sh'} " typescript support, commented out because of error on quiting vim / neovim
     Plug 'mattn/webapi-vim' " webapi neede by rust pluggin
     Plug 'rhysd/vim-healthcheck', Cond(!has('nvim')) " CheckHealth in vim
+
+
+    " Plug 'szw/vim-tags' " auto generate tags using ctags, command TagsGenerate. disable because this plugin will change `:cd` during GFile or other fzf commands.
+    " Plug 'ludovicchabant/vim-gutentags' " auto generate tags - no external dependncies other than ctags. will use this instead of auto-ctags
+    " Plug 'mhartington/nvim-typescript', {'do': './install.sh'} " typescript support, commented out because of error on quiting vim / neovim
+
 

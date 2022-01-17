@@ -109,12 +109,12 @@ nlspsettings.setup({
 null_ls.setup({
 	sources = {
 		-- lua formatter and linter
-		require("null-ls").builtins.formatting.stylua,
-		require("null-ls").builtins.diagnostics.luacheck,
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.diagnostics.luacheck,
 		-- python formatter and linter
-		require("null-ls").builtins.formatting.black,
-		require("null-ls").builtins.diagnostics.flake8,
+		null_ls.builtins.formatting.black,
+		null_ls.builtins.diagnostics.flake8,
 		-- spell completion
-		require("null-ls").builtins.completion.spell,
+		null_ls.builtins.completion.spell,
 	},
 })
