@@ -598,6 +598,6 @@ endif
 
 " source lua files
 if has('nvim-0.5') && exists("g:lspconfig")
-    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/lsp_config.lua'
-    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/treesitter.lua'
+    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/lsp_config.lua'
+    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/treesitter.lua'
 endif
