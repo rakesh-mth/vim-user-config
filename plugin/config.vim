@@ -247,6 +247,10 @@
 " set tags path inside .git folder
     nnoremap <leader>ta :tag 
 
+" for plugin vim-plug - install and update plugins
+    nnoremap <silent> <leader>pi :PlugInstall<CR> | " install plugins
+    nnoremap <silent> <leader>pu :PlugUpdate<CR>  | " update plugins
+
 " for plugin nerd tree : enable line numbers, make sure relative line numbers are used
     nnoremap <silent> <leader>e :NERDTreeToggle<CR> | " mapping similar to LunarVim
     nnoremap <silent> <leader>pt :NERDTreeToggle<Enter> :normal zz<CR> :wincmd p<CR>
@@ -318,59 +322,14 @@
     nnoremap <leader>li :LspInfo<CR>
     nnoremap <leader>ln :NullLsInfo<CR>
 
-" move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
-    command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
-    function! QuickfixFilenames()
-      " Building a hash ensures we get each buffer only once
-      let buffer_numbers = {}
-      for quickfix_item in getqflist()
-        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-      endfor
-      return join(values(buffer_numbers))
-    endfunction
+" Toggle header and cpp file - command is in functions.vim.
+    nnoremap <silent> <leader>o :call svim#functions#SwitchSourceHeader()<CR>
 
-" Toggle header and cpp file
-    function! SwitchSourceHeader()
-        if (expand("%:e") == "cpp" || expand("%:e") == "c")
-            execute 'tag ' . expand("%:t:r") . '.h'
-        elseif (expand("%:e") == "h")
-            execute 'tag ' . expand("%:t:r") . '.cpp'
-        else
-            echo "file in not either .h, .c or .cpp"
-        endif
-    endfunction
-    nnoremap <silent> <leader>o :call SwitchSourceHeader()<CR>
+" delete inactive buffers - command is in functions.vim.
+    nnoremap <silent> <leader>bd :call svim#functions#DeleteInactiveBufs()<CR>
 
-" delete inactive buffers
-    function! DeleteInactiveBufs()
-        "From tabpagebuflist() help, get a list of all buffers in all tabs
-        let tablist = []
-        for i in range(tabpagenr('$'))
-            call extend(tablist, tabpagebuflist(i + 1))
-        endfor
-
-        let nWipeouts = 0
-        for i in range(1, bufnr('$'))
-            if bufexists(i) && !getbufvar(i,"&mod") && getbufvar(i, "&buftype") != "terminal" && index(tablist, i) == -1
-           		"bufno exists AND isn't modified AND isn't terminal buffer AND isn't in the list of buffers open in windows and tabs
-                silent exec 'bwipeout' i
-                let nWipeouts = nWipeouts + 1
-            endif
-        endfor
-        echomsg nWipeouts . ' buffer(s) wiped out'
-    endfunction
-    command! Bdi :call DeleteInactiveBufs()
-    nnoremap <silent> <leader>bd :call DeleteInactiveBufs()<CR>
-
-" refresh buffers if files changed outside vim 
-    " Like bufdo but restore the current buffer.
-    function! BufDo(command)
-        let currBuff=bufnr("%")
-        execute 'bufdo ' . a:command 
-        execute 'buffer ' . currBuff 
-    endfunction
-    command! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
-    nnoremap <leader>br :Bufdo e<cr><esc>
+" refresh buffers if files changed outside vim - command is in functions.vim.
+    nnoremap <silent> <leader>br :call svim#functions#Bufdo e<cr><esc>
 
 " add line above and below without leaving normal mode
     nnoremap <silent> <leader>ad :set paste<CR>m`o<Esc>``:set nopaste<CR>

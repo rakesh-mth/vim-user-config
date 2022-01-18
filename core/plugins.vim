@@ -47,6 +47,7 @@ endfunction
     Plug 'tpope/vim-sensible' " some defaults agreed
     Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most. Mkdir!
     Plug 'godlygeek/tabular' " Tabular for aligning texts in tabular format
+    Plug 'phaazon/hop.nvim' " easy motion like plugin
     " NERD tree will be loaded on the first invocation of NERDTreeToggle command
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
