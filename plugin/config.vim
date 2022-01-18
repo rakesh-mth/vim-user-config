@@ -1,45 +1,8 @@
 " copy content of this file to ~/.config/nvim/init.vim on mac and linux when using neovim
 
-" set commands : set default configs
-    set showmatch           " Show matching brackets.
-    set number              " Show the line numbers on the left side.
-    set expandtab           " Insert spaces when TAB is pressed.
-    set tabstop=4           " Render TABs using this many spaces.
-    set shiftwidth=4        " Indentation amount for < and > commands.
-    set path+=**            " search files in subfolders
-    set relativenumber      " enable relative number, set rnu or set nornu, shortcuts
-    set exrc                " load vimrc from current folder
-    set secure              " disable shell, autocmd and write command when loading vimrc from local directory
-    set foldmethod=indent   " fold method
-    set foldnestmax=10      " fold settings
-    set nofoldenable        " no fold on open a file
-    set foldlevel=2         " fold level
-    set ignorecase          " Make searching case insensitive
-    set smartcase           " ... unless the query has capital letters.
-    set gdefault            " Use 'g' flag by default with :s/foo/bar/.
-    set splitbelow          " Horizontal split below current. -- More natural splits
-    set splitright          " Vertical split to right of current. -- More natural splits
-    set hlsearch            " search highlighting, not default in vim, default in neovim.
-    set incsearch           " search while typing. `set is` or `set nois`. default in vim and neovim.
-    set mouse=a             " enable mouse support (resize splits, etc...)
-    set colorcolumn=120     " Indent line at what column? Set something like '99999' to not display it
-    set scrolloff=5         " Determines the number of context lines you would like to see above and below the cursor
-    set clipboard=unnamedplus   " use system clipboard ('+') for copy, paste and delete. all goes to '+' register.
-    set cedit=\<C-Y>            " use C-y to go to command mode window (q:) from command mode
-    " set cursorcolumn          " enable cursor column drawing
-    if has('win32unix')
-        set termguicolors   " enable true color
-    else
-        let colorterm=$COLORTERM
-        if colorterm =~# 'truecolor' || colorterm =~# '24bit'
-            set termguicolors       " enable true color
-        endif
-    endif
-    set cursorline          " color the cursor line, highlight current line.
-    set history=10000       " history of ex command. nvim default: 10000, vim default: 1000. keep is consistent to 10000.
-    filetype plugin on
-    syntax on
-    let mapleader = "\<Space>" " map leader key to Space
+filetype plugin on
+syntax on
+let mapleader = "\<Space>" " map leader key to Space
 
 " user home dir - g:UC_HOME_DIR should be defined in init.vim, redfine if it is not already.
     if !exists('g:UC_HOME_DIR')
@@ -62,6 +25,24 @@
     if !exists('g:UC_WORKSPACE_FOLDER')
         let g:UC_WORKSPACE_FOLDER= has('win32') ? 'f:\DevTrees' : $HOME . '/workspaces'
     endif
+
+" source all plugin configs
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/options.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/tags-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/indent-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/startify.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/path.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/log.vim'
+
+" source lua files
+if has('nvim-0.5') && exists("g:lspconfig")
+    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/lsp_config.lua'
+    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/treesitter.lua'
+    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/hop.lua'
+endif
 
 " add python exe locations (virtualenvs)
     if has('win32') || has('win32unix')
@@ -100,14 +81,7 @@
     " autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " toggle gui elements in VIM (no impact in nvim-qt)
-    function! ToggleGUICruft()
-      if &guioptions==''
-        exec('set guioptions=imTr')
-      else
-        exec('set guioptions-=imTr')
-      endif
-    endfunction
-    nnoremap <F11> <Esc>:call ToggleGUICruft()<cr>
+    nnoremap <F11> <Esc>:call svim#functions#ToggleGUICruft()<cr>
 
 " spell checker
     map <leader>sp :setlocal spell! spelllang=en_us<cr>
@@ -142,26 +116,18 @@
         nnoremap <silent> <leader>= :silent! call ZoomGuiFont(1)<CR>
         nnoremap <silent> <leader>- :silent! call ZoomGuiFont(-1)<CR>
     endif
-    let s:fullScreen = 0
-    function! ToggleFullScreen()
-        if (s:fullScreen == 1) | let s:fullScreen = 0 | else | let s:fullScreen = 1 | endif
-        if has('gui_macvim') " macvim
-            if (&fullscreen == 1) | set nofullscreen | else | set fullscreen | endif
-        elseif exists('g:GuiLoaded') " nvim-qt
-            call GuiWindowFullScreen(s:fullScreen)
-        endif
-    endfunc
+    " toggle full screen mode
     if has('nvim')
         if exists('g:fvim_loaded')
             nnoremap <leader>TF :FVimToggleFullScreen<CR>
         elseif has('gui_vimr')
             nnoremap <leader>TF :VimRToggleFullscreen<CR>
         else
-            nnoremap <leader>TF :call ToggleFullScreen()<CR>
+            nnoremap <leader>TF :call svim#functions#ToggleFullScreen()<CR>
         endif
         inoremap <silent>  <S-Insert>  <C-R>+| "paste from system clipboard in insert mode
     elseif has('gui_macvim')
-        nnoremap <leader>TF :call ToggleFullScreen()<CR>
+        nnoremap <leader>TF :call svim#functions#ToggleFullScreen()<CR>
     endif
     " save as root user
     if has('mac') || has('unix')
@@ -175,12 +141,7 @@
     nnoremap <leader>qp :cprev<cr>
 
 " spacemacs key bindings
-    " Toggle buffer
-    let s:bufferState = 0
-    function! BufferToggle()
-      if(s:bufferState == 1) | let s:bufferState = 0 | bp | else | let s:bufferState = 1 | bn | endif
-    endfunc
-    nnoremap <leader><TAB> :call BufferToggle()<cr>| " Toggle between presious and current buffer.
+    nnoremap <leader><TAB> :call svim#functions#BufferToggle()<cr>| " Toggle between presious and current buffer.
     nnoremap <leader><leader> :| " switch to command mode
     nnoremap <leader>fed :e $MYVIMRC<cr>| " open vim configuration file (.vimrc or init.vim)
     nnoremap <leader>gb  :GBranches<cr>| " open  page (from fugitive)
@@ -188,18 +149,10 @@
     nnoremap <leader>gg  :Git \| wincmd _ \| normal gu<cr>| " open git status page (from fugitive), and jump to Unstaged
     nnoremap <leader>gp  :Git push<cr> " push to remote branch
     nnoremap <leader>gc  :Commits<cr>| " open commit list in current branch
-    nnoremap <leader>gd :tabe \| Git diff \| wincmd o<cr>| " open git diff in new tab
+    nnoremap <leader>gd  :tabe \| Git diff \| wincmd o<cr>| " open git diff in new tab
     nnoremap <leader>gdd :tabe \| Git diff --staged \| wincmd o<cr>| " open git diff in new tab
-    " Toggle cursor column
-    function! ToggleCursorCol() abort
-      if &cursorcolumn | set nocursorcolumn | else | set cursorcolumn | endif
-    endfunction
-    " toggle relativenumber
-    function! ToggleRelativeNumber() abort " can also use: nornu and rnu
-      if &relativenumber | set relativenumber! | else | set relativenumber | endif
-    endfunction
-    nnoremap <leader>tc :call ToggleCursorCol()<cr>| " toggle cursor column
-    nnoremap <leader>tr :call ToggleRelativeNumber()<cr>| " toggle relative number
+    nnoremap <leader>tc :call svim#functions#ToggleCursorCol()<cr>| " toggle cursor column
+    nnoremap <leader>tr :call svim#functions#ToggleRelativeNumber()<cr>| " toggle relative number
 
 " keybindig for goyo
     nnoremap <leader>go :Goyo<cr>
@@ -329,7 +282,7 @@
     nnoremap <silent> <leader>bd :call svim#functions#DeleteInactiveBufs()<CR>
 
 " refresh buffers if files changed outside vim - command is in functions.vim.
-    nnoremap <silent> <leader>br :call svim#functions#Bufdo e<cr><esc>
+    nnoremap <silent> <leader>br :call svim#functions#BufDo("e")<cr><esc>
 
 " add line above and below without leaving normal mode
     nnoremap <silent> <leader>ad :set paste<CR>m`o<Esc>``:set nopaste<CR>
@@ -360,13 +313,13 @@
             return s:warn('ag is not found, please install the_silver_searcher')
         endif
         cexpr system("ag --nogroup --column --vimgrep " . a:options . " " . a:word)
-    endfunc
+    endfunction
     function! RgCommand(word, options)
         if !executable('rg')
             return s:warn('rg is not found, please install ripgrep')
         endif
         cexpr system("rg --column --line-number --vimgrep " . a:options . " " . a:word)
-    endfunc
+    endfunction
     nnoremap <leader>stc  :silent vimgrep /TODO\\|FIXME/j % \| :cw<CR>
     nnoremap <leader>sta  :silent vimgrep /TODO\\|FIXME/j `git ls-files` \| :cw<CR>
     nnoremap <leader>sav  :execute 'silent vim! <cword> `git ls-files` \| copen \| cc'<cr>
@@ -534,18 +487,4 @@ if !has('win32unix') && !has('nvim-0.5')
     if filereadable(COC_EXTENSIONS_PATH) | exec "source " . COC_EXTENSIONS_PATH | endif
 endif
 
-" source all plugin configs
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/tags-config.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/indent-config.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/startify.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/path.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/log.vim'
 
-" source lua files
-if has('nvim-0.5') && exists("g:lspconfig")
-    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/lsp_config.lua'
-    exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/treesitter.lua'
-endif

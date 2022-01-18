@@ -1,3 +1,5 @@
+" common functions
+
 " move files from copen to args from https://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim
 function! svim#functions#QuickfixFilenames()
   " Building a hash ensures we get each buffer only once
@@ -9,6 +11,7 @@ function! svim#functions#QuickfixFilenames()
 endfunction
 command! -nargs=0 -bar Qargs execute 'args ' . svim#functions#QuickfixFilenames()
 
+
 " Toggle header and cpp file
 function! svim#functions#SwitchSourceHeader()
     if (expand("%:e") == "cpp" || expand("%:e") == "c")
@@ -19,6 +22,7 @@ function! svim#functions#SwitchSourceHeader()
         echo "file in not either .h, .c or .cpp"
     endif
 endfunction
+
 
 " delete inactive buffers
 function! svim#functions#DeleteInactiveBufs()
@@ -40,11 +44,53 @@ function! svim#functions#DeleteInactiveBufs()
 endfunction
 command! BufferDeleteInactive :call svim#functions#DeleteInactiveBufs()
 
-" refresh buffers if files changed outside vim 
-" Like bufdo but restore the current buffer.
+
+" Like bufdo but restore the current buffer. will be used for buffer refresh.
 function! svim#functions#BufDo(command)
     let currBuff=bufnr("%")
     execute 'bufdo ' . a:command 
     execute 'buffer ' . currBuff 
 endfunction
 command! -nargs=+ -complete=command Bufdo call svim#functions#BufDo(<q-args>)
+
+
+" toggle gui elements in VIM (no impact in nvim-qt)
+function! svim#functions#ToggleGUICruft()
+  if &guioptions==''
+    exec('set guioptions=imTr')
+  else
+    exec('set guioptions-=imTr')
+  endif
+endfunction
+
+
+" toggle full screen in gui mode
+let s:fullScreen = 0
+function! svim#functions#ToggleFullScreen()
+    if (s:fullScreen == 1) | let s:fullScreen = 0 | else | let s:fullScreen = 1 | endif
+    if has('gui_macvim') " macvim
+        if (&fullscreen == 1) | set nofullscreen | else | set fullscreen | endif
+    elseif exists('g:GuiLoaded') " nvim-qt
+        call GuiWindowFullScreen(s:fullScreen)
+    endif
+endfunc
+
+
+" Toggle buffer
+let s:bufferState = 0
+function! svim#functions#BufferToggle()
+  if(s:bufferState == 1) | let s:bufferState = 0 | bp | else | let s:bufferState = 1 | bn | endif
+endfunc
+
+
+" Toggle cursor column
+function! svim#functions#ToggleCursorCol() abort
+  if &cursorcolumn | set nocursorcolumn | else | set cursorcolumn | endif
+endfunction
+
+
+" toggle relativenumber
+function! svim#functions#ToggleRelativeNumber() abort " can also use: nornu and rnu
+  if &relativenumber | set relativenumber! | else | set relativenumber | endif
+endfunction
+
