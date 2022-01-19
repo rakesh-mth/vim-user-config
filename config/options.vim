@@ -1,5 +1,9 @@
 " set commands : set default configs
 
+filetype plugin on
+syntax on
+let mapleader = "\<Space>" " map leader key to Space
+
 set showmatch           " Show matching brackets.
 set number              " Show the line numbers on the left side.
 set expandtab           " Insert spaces when TAB is pressed.
