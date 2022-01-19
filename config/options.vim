@@ -1,9 +1,5 @@
 " set commands : set default configs
 
-filetype plugin on
-syntax on
-let mapleader = "\<Space>" " map leader key to Space
-
 set showmatch           " Show matching brackets.
 set number              " Show the line numbers on the left side.
 set expandtab           " Insert spaces when TAB is pressed.
@@ -41,3 +37,14 @@ endif
 set cursorline          " color the cursor line, highlight current line.
 set history=10000       " history of ex command. nvim default: 10000, vim default: 1000. keep is consistent to 10000.
 
+
+filetype plugin on
+syntax on
+let mapleader = "\<Space>" " map leader key to Space
+
+
+" set viminfo for startify to work with vim
+if !has('nvim') && has('win32') | set viminfo+=n~/_viminfo | endif
+
+" configure options (string, number, list)
+let &cdpath=g:UC_WORKSPACE_FOLDER . ',,' " cdpath to easily change directory using lcd (lcd foldername-in-cdpath)
