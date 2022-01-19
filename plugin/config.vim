@@ -30,14 +30,15 @@ let mapleader = "\<Space>" " map leader key to Space
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/options.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/mappings.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/autocmd.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/python.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/startify.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/path.vim'
+    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/log.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/tags-config.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/indent-config.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/nerdtree-config.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/ultisnip-config.vim'
     exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/cpp-config.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/startify.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/path.vim'
-    exec 'source ' . g:UC_PLUGGED_DIR . '/vim-user-config/config/log.vim'
 
 " source lua files
 if has('nvim-0.5') && exists("g:lspconfig")
@@ -46,23 +47,6 @@ if has('nvim-0.5') && exists("g:lspconfig")
     exec 'luafile ' . g:UC_PLUGGED_DIR . '/vim-user-config/lua/svim/hop.lua'
 endif
 
-" add python exe locations (virtualenvs)
-    if has('win32') || has('win32unix')
-        let python2_vp  = g:UC_HOME_DIR . '/virtualenvs/python27/Scripts/'
-        let python38_vp = g:UC_HOME_DIR . '/virtualenvs/python38/Scripts/'
-        let python39_vp = g:UC_HOME_DIR . '/virtualenvs/python39/Scripts/'
-        let python_exe  = 'python.exe' 
-    elseif has('mac') || has('unix')
-        let python2_vp  = g:UC_HOME_DIR . '/.virtualenvs/python2.7/bin/'
-        let python38_vp = g:UC_HOME_DIR . '/.virtualenvs/python3.8/bin/'
-        let python39_vp = g:UC_HOME_DIR . '/.virtualenvs/python3.9/bin/'
-        let python_exe  = 'python'
-    endif
-    if !empty(glob(python2_vp . python_exe))  | let g:python_host_prog  = python2_vp  . python_exe | endif
-    if !empty(glob(python38_vp. python_exe))  | let g:python3_host_prog = python38_vp . python_exe | endif
-    if !empty(glob(python39_vp . python_exe)) | let g:python3_host_prog = python39_vp . python_exe | endif
-    if !empty(glob(python38_vp . 'nvr')) | let $PATH = python38_vp . ':' . $PATH | endif
-    if !empty(glob(python39_vp . 'nvr')) | let $PATH = python39_vp . ':' . $PATH | endif
 
 " install plug.vim (bootstrap plugin)
     let plugPath = g:UC_VIM_CONFIG_FOLDER_FULL_PATH . '/autoload/plug.vim'
@@ -75,12 +59,8 @@ endif
 " set viminfo for startify to work with vim
     if !has('nvim') && has('win32') | set viminfo+=n~/_viminfo | endif
 
-
 " configure options (string, number, list)
     let &cdpath=g:UC_WORKSPACE_FOLDER . ',,' " cdpath to easily change directory using lcd (lcd foldername-in-cdpath)
-
-" lsp for omni func complition - this is moved to lua file for lsp
-    " autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 
 " source plug configs. coc.nvim is used with neovim < 0.5.

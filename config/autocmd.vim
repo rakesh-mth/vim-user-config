@@ -1,5 +1,11 @@
 " auto commands on events
 
+" lsp for omni func complition - this is moved to lua file for lsp
+" augroup enable omnifunc for lsp for python filetype
+    " autocmd!
+    " autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
+" augroup END 
+
 " auto switch to insert mode when terminal buffer becomes active
 augroup auto_term_insert_and_do_not_close_on_last_window_exit
     autocmd!
