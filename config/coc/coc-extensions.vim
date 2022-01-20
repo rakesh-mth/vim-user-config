@@ -6,7 +6,6 @@ let g:coc_global_extensions = [
   \ 'coc-java-debug',
   \ 'coc-java',
   \ 'coc-sh',
-  \ 'coc-actions',
   \ 'coc-lists',
   \ 'coc-emmet',
   \ 'coc-tasks',
@@ -28,6 +27,7 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-marketplace',
   \ ]
+  " \ 'coc-actions', // not supported in vim, only neovim is supported
   " \ 'coc-tabnine',
   " \ 'coc-highlight',
   " \ 'coc-bookmark', //depricated
