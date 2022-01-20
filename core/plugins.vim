@@ -47,18 +47,10 @@ endfunction
     Plug 'tpope/vim-sensible' " some defaults agreed
     Plug 'tpope/vim-eunuch' " Vim sugar for the UNIX shell commands that need it the most. Mkdir!
     Plug 'godlygeek/tabular' " Tabular for aligning texts in tabular format
-    Plug 'phaazon/hop.nvim' " easy motion like plugin
+    Plug 'phaazon/hop.nvim', Cond(has('nvim')) " easy motion like plugin
     " NERD tree will be loaded on the first invocation of NERDTreeToggle command
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
-    if has('win32unix') " vim in msys
-    else
-        Plug 'SirVer/ultisnips' " Track the engine. for snippets.
-        if !has('nvim-0.5')
-            " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' } " code completion
-            Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine for vim8 & neovim, full language server protocol support as VSCode. complete with YouCompleteMe
-        endif
-    endif
     if has('nvim-0.5')
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " treesitter for better text color
         Plug 'nvim-lua/plenary.nvim'  " dependencies for luss-ls
@@ -72,6 +64,11 @@ endfunction
         Plug 'sheerun/vim-polyglot' " used by nova color schema, multiple programming language support (basic). tree-sitter is replacing this plugin.
         Plug 'HerringtonDarkholme/yats.vim' " Add a syntax file for typescript. YATS is the best. tree-sitter is replacing this plugin.
         Plug 'octol/vim-cpp-enhanced-highlight' " tree-sitter is replacing this plugin.
+        " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' } " code completion
+        Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine for vim8 & neovim, full language server protocol support as VSCode. complete with YouCompleteMe
+        if !has('win32unix') " vim not in msys
+            Plug 'SirVer/ultisnips' " Track the engine. for snippets.
+        endif
     endif
     Plug 'honza/vim-snippets' " Snippets are separated from the engine. Add this if you want them:
     " Code to execute when the plugin is lazily loaded on demand
