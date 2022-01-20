@@ -177,7 +177,10 @@
     nnoremap <leader>pp :FzfSwitchProject<CR>| " select project using <Space>pp, similar to spacemacs and doom-emacs
     nnoremap <leader>p  :FzfSwitchProject<CR>| " efficient version (similar to f, b, t, w, l)
     let g:fzfSwitchProjectWorkspaces=[g:UC_WORKSPACE_FOLDER] " workspaces
-    let g:fzfSwitchProjectProjects=[ stdpath("config"), g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d' ] " individual projects
+    let g:fzfSwitchProjectProjects=[ g:UC_PLUGGED_DIR . '/vim-user-config', g:UC_HOME_DIR . '/.config/emacs/spacemacs/.emacs.d', g:UC_HOME_DIR . '/.config/emacs/doom-emacs/.emacs.d' ] " individual projects
+    if has('nvim')
+        call add(g:fzfSwitchProjectProjects, stdpath("config"))
+    endif
 
 " lsp mappings
     nnoremap <leader>lI :LspInstallInfo<CR>
