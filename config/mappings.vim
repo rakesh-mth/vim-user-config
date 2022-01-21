@@ -74,6 +74,9 @@
     nnoremap <leader>tc :call svim#functions#ToggleCursorCol()<cr>| " toggle cursor column
     nnoremap <leader>tr :call svim#functions#ToggleRelativeNumber()<cr>| " toggle relative number
 
+" LunarVim key bindings
+    nnoremap <leader>q :qa<cr>
+
 " keybindig for goyo
     nnoremap <leader>go :Goyo<cr>
 
