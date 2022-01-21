@@ -49,9 +49,9 @@ augroup plugin_fugitive
     " recording macro will not work if it is mapped to gq
     autocmd FileType fugitive nmap <buffer> q gq
     " put into insert mode after jump to line number 1 for git commit buffer
-    autocmd FileType gitcommit,gitrebase 1 | startinsert
+    autocmd FileType gitcommit 1 | startinsert
     " delete git commit buffer after :wq, git waits for nvr to finish
-    autocmd! FileType gitcommit,gitrebase set bufhidden=delete
+    autocmd FileType gitcommit,gitrebase set bufhidden=delete
 augroup END
 
 augroup plugin_lsp
