@@ -13,7 +13,8 @@ augroup auto_term_insert_and_do_not_close_on_last_window_exit
     " autocmd BufCreate,BufWinEnter,WinEnter term://* startinsert
     if has('nvim')
         autocmd TermOpen * set bufhidden=hide " hide buffer so that switching out of terminal window does not close terminal
-        autocmd TermClose * bd! | if winnr('$') == 0 | tabprevious | endif " switch to previous tab if there are no more window
+        " TODO: this line is commented because terminal windows are not closed
+        " autocmd TermClose * bd! | if winnr('$') == 0 | tabprevious | endif " switch to previous tab if there are no more window
     endif
 augroup END 
 
